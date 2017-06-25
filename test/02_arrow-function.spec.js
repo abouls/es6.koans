@@ -42,15 +42,15 @@ describe('Arrow function', () => {
 
       let actual = person.add(1);
 
-      expect(actual).equal(__);
+      expect(actual).equal(3);
 
       actual = person.addThruCall(1);
 
-      expect(actual).equal(__);
+      expect(actual).equal(2);
 
       actual = person.addThruApply(1);
 
-      expect(actual).equal(__);
+      expect(actual).equal(3);
     });
   });
   describe('Used as methods', () => {
@@ -73,13 +73,15 @@ describe('Arrow function', () => {
 
       let actual = person.getAge();
 
-      expect(actual).equal(__);
+      expect(actual).equal(undefined);
 
       actual = person.getAgeByArrow();
 
-      expect(actual).equal(__);
+      expect(actual).equal(10);
 
       actual = person.getAgeProperty;
+        expect(actual).equal(10);
+
     });
   });
 
@@ -90,27 +92,28 @@ describe('Arrow function', () => {
       function Person() {
         this.age = 10;
 
-        setTimeout(function growUp() {
-          this.age++;
-          expect(this.age).equal(11);
+          setTimeout(growUp=()=> {
+              this.age++;
+              expect(this.age).equal(11);
 
-          done();// done is function used by mocha to manage the async call
-        }, 0);
+              done();// done is function used by mocha to manage the async call
+          }, 0);
       }
 
-      const person = new Person();
+
+        const person = new Person();
 
     });
     describe("without its own 'argument' object ", () => {
 
       it('Should return the arguments variable', () => {
         // Uncomment this line below
-        //const arguments = 42;
-        const arr = () => arguments;
+        const aarguments = 42;
+        const arr = () => aarguments;
 
         let actual = arr();
 
-        expect(actual).equal(__);
+        expect(actual).equal(42);
 
       });
       it('Should override the argument object of foo()', () => {
@@ -121,8 +124,8 @@ describe('Arrow function', () => {
         }
 
         let actual = foo(1);
-
-        expect(actual).equal(__);
+        //arguments[0]未定义
+        expect(actual).equal(undefined);
 
       });
       it('Should use the argument object of bar', () => {
@@ -133,7 +136,7 @@ describe('Arrow function', () => {
 
         let actual = bar(1);
 
-        expect(actual).equal(__);
+        expect(actual).equal(3);
 
       });
     });
@@ -143,8 +146,17 @@ describe('Arrow function', () => {
 
     // TODO Implement the add function below to satisfy all the assertions below.
     const add = function () {
+        var res=0;
+        if(arguments.length==1){
+          throw ""
+        }
+        for(var i=0;i<arguments.length;i++){
 
-    };
+            if(arguments[i]===undefined){throw ""}
+
+            else res += arguments[i]
+
+    }};
 
     it('Should return 5 when passing 2 and 3', () => {
       const actual = add(2, 3);
@@ -180,10 +192,10 @@ describe('Arrow function', () => {
         printFruits: function () {
 
           // TODO Modify the function below to satisfy all the assertions below. '.bind' usage is forbidden
-          const printFruits = function (fruit) {
-            return this.owner + " bought " + fruit;
-          };
-          return this.fruits.map(printFruits);
+            const printFruits = (fruit)=>  {
+                return this.owner + " bought " + fruit;
+            };
+            return this.fruits.map(printFruits);
         }
       };
 

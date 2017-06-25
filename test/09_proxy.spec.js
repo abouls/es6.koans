@@ -21,7 +21,9 @@ describe('Proxy', function() {
 
     // TODO Complete the handler of the Proxy below to prevent
     // any function execution (i.e. satisfy all the assertions below)
-    const proxiedAdminActions = new Proxy(adminActions, {
+    const proxiedAdminActions = new Proxy(adminActions, {get:function (target,name) {
+      // return name in target: ["Access forbidden"]
+    }
 
     });
 
@@ -43,7 +45,15 @@ describe('Proxy', function() {
     // Without touching the dog object, implement the handler
     // of the following Proxy to make our dog more talkative
     // (i.e. satisfy all the assertions below)
-    const talkativeDog = new Proxy(dog, {
+    const talkativeDog = new Proxy(dog, {set:function (obj, prop, value) {
+        if (prop==!"walk") {
+
+            return 'Woof-woof'
+
+        }
+        else return 'Walking...'
+
+    }
 
     });
 
@@ -63,6 +73,8 @@ describe('Proxy', function() {
     let numberOfAccess = 0;
     const loggedDatabaseAccess = new Proxy(accessDatabase, {
       // TODO Implement the handler of this proxy to satisfy the assertions.
+        get:function () {
+            numberOfAccess++}
     });
 
     loggedDatabaseAccess();

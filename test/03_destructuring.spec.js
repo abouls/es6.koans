@@ -15,10 +15,19 @@ describe('Destructuring', () => {
     it('With ES6', () => {
       // TODO: Get the first fruit
       let actual;
+      let rest;
+      let anar;
+      [actual,...rest]=fruits
       expect(actual).to.equal('brussels sprout');
       // TODO: Get the last fruit
+      //  WRONG
+      //   actual=[]
+      //   anar =['brussels sprout', 'apple', 'beetroot', 'broccoli', 'carrot']
+      //       [...anar, actual] = fruits
+
       expect(actual).to.equal('cherry');
       // TODO: Get the queue fruit;
+        [, ...actual] = fruits
       expect(actual).deep.equal(['apple', 'beetroot', 'broccoli', 'carrot', 'cherry']);
     });
 
@@ -30,6 +39,7 @@ describe('Destructuring', () => {
 
       const actual = [dog, cat];
       const result = ['Hector', 'Katy'];
+      //没做修改 这里是讲初始化？
       expect(actual).deep.equal(result);
     });
 
@@ -47,10 +57,10 @@ describe('Destructuring', () => {
       ];
 
       let actual = [];
-      
+
       // TODO: Write the destructuring and the push statement to satisfy all assertions
-      for (let { } of people) {
-        actual.push();
+      for (let { name,age} of people) {
+        actual.push(name+""+age);
       }
 
       expect(actual).deep.equal(['Mike 25', 'Tom 25']);
@@ -87,6 +97,7 @@ describe('Destructuring', () => {
 
       it('With ES6 object Destructuring to do the same operation', () => {
         // TODO Extract the required information using the spread operator.
+          let {id:id,name:fullName,handles:{twitter:twitter}}=getUserInfo()
         expect(id).to.be.defined;
         expect(fullName).to.equal('Davy Engone');
         expect(twitter).to.equal('davyengone');
@@ -113,7 +124,9 @@ describe('Destructuring', () => {
       });
       it("With ES6 & a function parameter's default value", () => {
 
-        function drawES6Chart(/* // TODO: Provide the parameter desctructuring to satisfy all assertions below  */) {
+        function drawES6Chart(/* // TODO: Provide the parameter desctructuring to satisfy all assertions below  */
+                              {size = 'big', cords = { x: 0, y: 0 }, radius = 25} = {}) {
+
           return [size, cords, radius];
         }
         let actual = drawES6Chart();

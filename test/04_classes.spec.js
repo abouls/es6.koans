@@ -7,7 +7,9 @@ chai.should();
 describe('Class in ES6', () => {
   describe('Like a function ...', () => {
     // Declare the Human class below that will satisfy all assertions
-    let Human;
+      let Human=class{
+
+      };
     it('should be a function', () => {
 
       expect(Human).to.be.a('function');
@@ -15,18 +17,19 @@ describe('Class in ES6', () => {
     it('should not be hoisted like function', () => {
       let polyFunc;
 
+        function PolygoneFunc(height, width) {
+            this.height = height;
+            this.width = width;
+
+            this.log = function () {
+                return `H:${this.height} & W:${this.width}`;
+            };
+        }
+
       (() => {
         polyFunc = new PolygoneFunc(3, 5);
       }).should.not.throw(Error);
 
-      function PolygoneFunc(height, width) {
-        this.height = height;
-        this.width = width;
-
-        this.log = function () {
-          return `H:${this.height} & W:${this.width}`;
-        };
-      }
 
       let actual = polyFunc.log();
 
@@ -35,19 +38,22 @@ describe('Class in ES6', () => {
       let polyClass;
 
       // Hint: the declaration position of PolygoneClass is not correct
+
+        class PolygoneClass {
+            constructor(height, width) {
+                this.height = height;
+                this.width = width;
+            }
+            log() {
+                return `H:${this.height} & W:${this.width}`;
+            }
+        }
+
       (() => {
         polyClass = new PolygoneClass(3, 5);
       }).should.not.throw(Error);
 
-      class PolygoneClass {
-        constructor(height, width) {
-          this.height = height;
-          this.width = width;
-        }
-        log() {
-          return `H:${this.height} & W:${this.width}`;
-        }
-      }
+
 
       actual = polyClass.log();
 
@@ -56,8 +62,19 @@ describe('Class in ES6', () => {
     });
   });
   describe('Property ...', () => {
-    // Declare and implement the Man class to satisfy all assertions below
+      // Declare and implement the Man class to satisfy all assertions below
+      class Man {
 
+          constructor(name){
+              this.name = name
+          }
+
+          Walk () {
+              return(this.name+"walk")
+          }
+          // inject:["",""]
+
+      }
     it('should have a name property called Human', () => {
       expect(Man).has.property('name').equal('Man');
     });
@@ -85,6 +102,7 @@ describe('Class in ES6', () => {
     describe('Getter and Setter in ES6 class', () => {
 
       it('Should have an instance property fullName', () => {
+          //  ？？？ new Man里面可以直接{}？
         let obj = new Man({
           fullName: 'Tom Thomas'
         });

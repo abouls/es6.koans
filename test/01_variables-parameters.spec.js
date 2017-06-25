@@ -14,7 +14,7 @@ describe('var, let, const', () => {
     it('what do you expect???', () => {
       const actual = iterator(false);
 
-      expect(actual).equal(__);
+      expect(actual).equal(undefined);
     });
   });
 
@@ -33,7 +33,7 @@ describe('var, let, const', () => {
     });
   });
 
-  xdescribe('const...', () => {
+  describe('const...', () => {
     function iterator(bool) {
       if (bool) {
         const name = 'we';

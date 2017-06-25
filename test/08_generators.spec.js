@@ -18,6 +18,8 @@ describe('Generators', () => {
 
     it('Via function declaration', () => {
       // Declare and Implement the generator function foo that will satisfy all assertions
+      //  ???
+        let foo =['a',1,'c']
 
       const actual = getGeneratorResultInArray(foo);
       expect(actual).deep.equal(['a', 1, 'c']);

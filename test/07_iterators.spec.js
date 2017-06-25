@@ -12,7 +12,7 @@ describe('iterator function', () => {
   describe('Iterable Protocol', () => {
     it('Should have @@iterator( Symbol.iterator) property', () => {
       // Implement a iterable below to satisfy all assertions
-      let iterable = {
+      let iterable = {a:()=>{return true}
       };
 
       // We use the reflection API to get all proper keys
@@ -28,7 +28,16 @@ describe('iterator function', () => {
   describe('Iterator Protocol ...', () => {
     it('Should return an object that provides a next method/function', () => {
       // Implement a iterator below to satisfy all assertions
-      let iterator;
+        let iterator=(array)=>{
+            let nextIndex = 0;
+            return {
+                next: function(){
+                    return nextIndex < array.length ?
+                        {value: array[nextIndex++], done: false} :
+                        {done: true};
+                }
+            }
+        };
 
       expect(iterator([]))
         .to.be.an('object')
@@ -64,7 +73,11 @@ describe('iterator function', () => {
           this.customers = customers;
         }
         // Create a function below to make this.customers iterable
-      }
+        //   iterator(){this.customers.forEach((item)=>{
+        //       yield  item;
+        //   })
+
+          }
 
       it('Company should be iterable by customers', () => {
         let company = new Company(['Davy', 'Thomas', 'Lars']);
@@ -132,7 +145,7 @@ describe('iterator function', () => {
             },
             next() {
               // Implement the next function that will return the key and object value of the key
-              
+              //   return ()=>{key:propKeys[key], value:obj.propKeys[key++]}
             }
           }
         }

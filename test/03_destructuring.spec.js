@@ -36,9 +36,11 @@ describe('Destructuring', () => {
       let cat;
 
       [dog = 'Hector', cat = 'Katy'] = [cat, dog];
+      //[dog = 'Hector', cat = 'Katy'] = [undefined, 'Larry'];
 
       const actual = [dog, cat];
-      const result = ['Hector', 'Katy'];
+      //TODO
+      const result = ['Hector', 'Larry'];
       //没做修改 这里是讲初始化？
       expect(actual).deep.equal(result);
     });
@@ -60,10 +62,10 @@ describe('Destructuring', () => {
 
       // TODO: Write the destructuring and the push statement to satisfy all assertions
       for (let { name,age} of people) {
-        actual.push(name+""+age);
+        actual.push(name+" "+age);
       }
 
-      expect(actual).deep.equal(['Mike 25', 'Tom 25']);
+      expect(actual).deep.equal(['Mike 35', 'Tom 25']);
     });
   });
 

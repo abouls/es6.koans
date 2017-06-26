@@ -71,11 +71,21 @@ describe('iterator function', () => {
       class Company {
         constructor(customers) {
           this.customers = customers;
+          this.max=customers.length-1;
+          this.id=0
+        }
+          [Symbol.iterator]() {
+              return this;
+          }
+        next(){
+            if (this.id >= this.max)
+                return {done:true}
+            else
+                return (this.customers[this.id++]);
+
         }
         // Create a function below to make this.customers iterable
-        //   iterator(){this.customers.forEach((item)=>{
-        //       yield  item;
-        //   })
+       // Company[Symbol.iterator]=function(){}
 
           }
 
@@ -145,7 +155,7 @@ describe('iterator function', () => {
             },
             next() {
               // Implement the next function that will return the key and object value of the key
-              //   return ()=>{key:propKeys[key], value:obj.propKeys[key++]}
+              //   return (key,value)=>{key:propKeys[key], value:obj.propKeys[key++]}
             }
           }
         }

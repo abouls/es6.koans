@@ -25,11 +25,15 @@ describe('ES6 Collections', () => {
     });
 
     it('forEach', function() {
+      let amap = new Map()
       amap.set('firstname', 'John');
       amap.set('lastname', 'Doe');
       amap.set('age', 42);
       // TODO Use the forEach loop to satisfy the assertion below
-      let actual = amap.forEach((value,key)=>{return (key +':'+value);});;
+      // let actual = amap.forEach(function(value, key) {
+      //     return key,value
+      // }, amap);
+        let actual = amap.forEach((value,key)=>{return  '('+key +':'+value+')';});
 
       expect(actual).to.equal('(firstname:John)(lastname:Doe)(age:42)');
     });

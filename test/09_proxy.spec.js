@@ -20,22 +20,22 @@ describe('Proxy', function() {
     const adminActions = new AdminActions;
 
     // TODO Complete the handler of the Proxy below to prevent
-    // any function execution (i.e. satisfy all the assertions below)
-    const proxiedAdminActions = new Proxy(adminActions, {get:function (target,name) {
-      // return name in target: ["Access forbidden"]
-    }
+        // any function execution (i.e. satisfy all the assertions below)
+        const proxiedAdminActions = new Proxy(adminActions, {get:function (target,name) {
+            // return name in target: ["Access forbidden"]
+        }
 
-    });
+        });
 
-    expect(proxiedAdminActions.openLock()).to.equal('Access forbidden');
-    expect(proxiedAdminActions.deleteDatabase()).to.equal('Access forbidden');
+      expect(proxiedAdminActions.openLock()).to.equal('Access forbidden');
+      expect(proxiedAdminActions.deleteDatabase()).to.equal('Access forbidden');
   });
 
-  it('intercepts unknown attributes', function() {
-    // Here is a dog object.
-    // It is named Hector and the only thing he can do is walk
-    const dog = {
-      name: 'Hector',
+    it('intercepts unknown attributes', function() {
+        // Here is a dog object.
+        // It is named Hector and the only thing he can do is walk
+        const dog = {
+            name: 'Hector',
 
       walk: function() {
         return 'Walking...';

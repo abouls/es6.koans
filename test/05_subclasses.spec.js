@@ -38,7 +38,7 @@ describe('Sub classing ', () => {
 
     actual = d.speak();
 
-    expect(actual).deep.equal('Mu makes a noise,Mu barks');
+    expect(actual).deep.equal(['Mu makes a noise.', 'Mu barks.']);
   });
 
   it('Should extends traditional function-based "classes" ', () => {
@@ -65,7 +65,7 @@ describe('Sub classing ', () => {
 
     actual = d.speak();
 
-    expect(actual).equal('Mu makes a noise');
+    expect(actual).equal('Mu barks.');
   });
 
   it('Should not extend non constructive object', () => {
@@ -107,24 +107,27 @@ describe('Sub classing ', () => {
     //
     //   Object.setPrototypeOf(Animal,reAnimal)
     //
-    //   class Dog extends Animal {
-    //       super();
-    //       // constructor(name) {
-    //       //     this.name = name;
-    //       // }
-    //       speak() {
-    //           return this.name + ' barks.';
-    //       }
-    //   }
+      class Dog  {
+          constructor(name) {
+              this.name = name;
+          }
+          eat() {
+              return 'Eating ...';
+          }
+          speak() {
+              return this.name + ' barks.';
+          }
+      }
+      Object.setPrototypeOf(Dog,Animal)
 
     const d = new Dog('Mu');
     let actual = d.eat();
 
-    expect(actual).equal(__);
+    expect(actual).equal('Eating ...');
 
     actual = d.speak();
 
-    expect(actual).equal(__);
+    expect(actual).equal('Mu barks.');
 
   });
 });

@@ -66,15 +66,26 @@ describe('Class in ES6', () => {
       class Man {
 
           constructor(name){
+              if (typeof name ===undefined){throw new Error()}
+              if (typeof name.fullName !=="string"){throw new Error()}
+
+
               this.name = name
+              this.fullName=name.fullName
+
           }
 
           Walk () {
               return(this.name+"walk")
           }
           // inject:["",""]
+          // static inject = [""]
+      //    属性=输入
+
+          // fullname = []
 
       }
+      Man.inject=[]
     it('should have a name property called Human', () => {
       expect(Man).has.property('name').equal('Man');
     });
